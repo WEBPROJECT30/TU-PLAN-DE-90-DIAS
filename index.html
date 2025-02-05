@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebProject - Plan de Dieta Personalizado</title>
+    <title>WebProject - Plan de Dieta</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            background: linear-gradient(to right, #333, #1a1a1a);
+            background-color: #1a1a1a;
             color: white;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
         }
         h1 {
             color: yellow;
-            font-size: 2.5rem;
         }
         nav ul {
             list-style: none;
             padding: 0;
-            margin: 0;
         }
         nav ul li {
             display: inline;
@@ -29,40 +26,20 @@
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
         }
         .btn {
             background-color: yellow;
             color: black;
-            padding: 12px 25px;
+            padding: 10px 20px;
             text-decoration: none;
             display: inline-block;
             margin-top: 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #e6e600;
         }
         #formularioPersonalizado {
             margin-top: 20px;
-            padding: 20px;
+            padding: 15px;
             background-color: #222;
             border-radius: 10px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .btn {
-                padding: 10px 20px;
-            }
         }
     </style>
 </head>
@@ -77,114 +54,27 @@
             </ul>
         </nav>
     </header>
+
     <section id="inicio">
         <h2>Tu Plan de Dieta Personalizado</h2>
-        <p>Genera tu plan basado en tus objetivos, deporte y preferencias alimenticias.</p>
+        <p>Descubre un plan hecho a medida según tu cuerpo y objetivos.</p>
         <a href="#formulario" class="btn">Generar mi Plan</a>
     </section>
+
     <section id="formulario">
         <h2>Completa el Formulario</h2>
         <form id="dietaForm">
-            <label for="sexo">Sexo:</label>
-            <select id="sexo" required>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-            </select>
             <label for="objetivo">Objetivo:</label>
             <select id="objetivo">
                 <option value="bajar">Bajar Peso</option>
                 <option value="mantener">Mantener Peso</option>
                 <option value="ganar">Ganar Masa Muscular</option>
             </select>
+
             <label for="peso">Peso (kg):</label>
             <input type="number" id="peso" required>
+
             <label for="altura">Altura (cm):</label>
             <input type="number" id="altura" required>
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" required>
-            <label for="actividad">Actividad Física:</label>
-            <select id="actividad">
-                <option value="1.2">Sedentario</option>
-                <option value="1.375">Actividad ligera</option>
-                <option value="1.55">Actividad moderada</option>
-                <option value="1.725">Actividad intensa</option>
-                <option value="1.9">Muy intenso</option>
-            </select>
-            <label for="deporte">Deporte preferido:</label>
-            <input type="text" id="deporte" required>
-            <button type="submit" class="btn">Generar Plan</button>
-        </form>
-        <div id="formularioPersonalizado"></div>
-    </section>
 
-    <script>
-        document.getElementById("dietaForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let sexo = document.getElementById("sexo").value;
-            let objetivo = document.getElementById("objetivo").value;
-            let peso = parseInt(document.getElementById("peso").value);
-            let altura = parseInt(document.getElementById("altura").value);
-            let edad = parseInt(document.getElementById("edad").value);
-            let actividad = parseFloat(document.getElementById("actividad").value);
-            let deporte = document.getElementById("deporte").value;
-            
-            // Calcular TMB
-            let tmb;
-            if (sexo === "masculino") {
-                tmb = 88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad);
-            } else {
-                tmb = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad);
-            }
-            
-            // Calorías de mantenimiento
-            let caloriasMantenimiento = tmb * actividad;
-            
-            // Ajuste según objetivo
-            let caloriasFinales;
-            if (objetivo === "bajar") {
-                caloriasFinales = caloriasMantenimiento * 0.8; // Déficit calórico
-            } else if (objetivo === "mantener") {
-                caloriasFinales = caloriasMantenimiento; // Mantener
-            } else if (objetivo === "ganar") {
-                caloriasFinales = caloriasMantenimiento * 1.2; // Superávit calórico
-            }
-
-            // Plan personalizado
-            let planComida = `
-                <h3>Tu Plan Personalizado</h3>
-                <p><strong>Objetivo:</strong> ${objetivo}</p>
-                <p><strong>Peso:</strong> ${peso} kg</p>
-                <p><strong>Altura:</strong> ${altura} cm</p>
-                <p><strong>Edad:</strong> ${edad} años</p>
-                <p><strong>Deporte:</strong> ${deporte}</p>
-                <p><strong>Calorías diarias recomendadas:</strong> ${Math.round(caloriasFinales)} calorías</p>
-            `;
-            
-            // Ejemplo de plan de comida basado en calorías y objetivo
-            planComida += `
-                <h4>Comida recomendada:</h4>
-                <ul>
-                    <li>Desayuno: Avena con frutas (400 cal)</li>
-                    <li>Almuerzo: Pollo con ensalada (600 cal)</li>
-                    <li>Merienda: Yogur con nueces (200 cal)</li>
-                    <li>Cena: Pescado con vegetales (500 cal)</li>
-                </ul>
-            `;
-            
-            // Plan de entrenamiento
-            let planEntrenamiento = `
-                <h4>Entrenamiento recomendado:</h4>
-                <ul>
-                    <li>Lunes: Cardio (30 min)</li>
-                    <li>Miércoles: Pesas (fuerza)</li>
-                    <li>Viernes: HIIT (20 min)</li>
-                    <li>Domingo: Yoga/Descanso</li>
-                </ul>
-            `;
-            
-            document.getElementById("formularioPersonalizado").innerHTML = planComida + planEntrenamiento;
-        });
-    </script>
-</body>
-</html>
+            <label for="edad">Edad:<
