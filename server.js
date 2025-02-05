@@ -32,7 +32,7 @@ app.post("/generar-plan", async (req, res) => {
             temperature: 0.7,
         }, {
             headers: {
-                "Authorization": `Bearer TU_CLAVE_DE_API_DE_OPENAI`, // Sustituye con tu clave
+                "Authorization": `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`, // Sustituye con tu clave
                 "Content-Type": "application/json"
             }
         });
