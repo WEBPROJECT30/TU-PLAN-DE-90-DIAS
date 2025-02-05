@@ -1,4 +1,4 @@
-const apiKey = "sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; // Tu clave API real de OpenAI
+const apiKey = "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"; // Tu clave API real de OpenAI
 
 document.getElementById("dietaForm").addEventListener("submit", function(event) {
     event.preventDefault();
