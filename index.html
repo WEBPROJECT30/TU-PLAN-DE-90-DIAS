@@ -1,123 +1,79 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebProject - Plan de Dieta</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        h1 {
-            color: yellow;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        .btn {
-            background-color: yellow;
-            color: black;
-            padding: 10px 20px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        #formularioPersonalizado {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #222;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>WebProject</h1>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#planes">Planes</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section id="inicio">
-        <h2>Tu Plan de Dieta Personalizado</h2>
-        <p>Descubre un plan hecho a medida según tu cuerpo y objetivos.</p>
-        <a href="#formulario" class="btn">Generar mi Plan</a>
-    </section>
-    <section id="formulario">
-        <h2>Completa el Formulario</h2>
-        <form id="dietaForm">
-            <label for="objetivo">Objetivo:</label>
-            <select id="objetivo" required>
-                <option value="bajar">Bajar Peso</option>
-                <option value="mantener">Mantener Peso</option>
-                <option value="ganar">Ganar Masa Muscular</option>
-            </select>
-            <br><br>
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" required>
-            <br><br>
-            <label for="altura">Altura (cm):</label>
-            <input type="number" id="altura" required>
-            <br><br>
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" required>
-            <br><br>
-            <label for="deporte">Deporte practicado:</label>
-            <input type="text" id="deporte" required>
-            <br><br>
-            <button type="submit" class="btn">Generar Plan</button>
-        </form>
-        <div id="formularioPersonalizado"></div>
-    </section>
-    <script>
-        // Evento cuando se envía el formulario
-        document.getElementById("dietaForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let objetivo = document.getElementById("objetivo").value;
-            let peso = parseInt(document.getElementById("peso").value);
-            let altura = parseInt(document.getElementById("altura").value);
-            let edad = parseInt(document.getElementById("edad").value);
-            let deporte = document.getElementById("deporte").value;
-            
-            let plan = "";
-            
-            // Crear el plan según el objetivo seleccionado
-            if (objetivo === "bajar") {
-                plan = `Debes consumir menos calorías de las que gastas. Incluye más proteínas y vegetales en tu dieta. Haz ejercicios de cardio como correr o nadar.`;
-            } else if (objetivo === "mantener") {
-                plan = `Tu dieta debe ser equilibrada. Consume carbohidratos complejos, proteínas magras y grasas saludables en cada comida.`;
-            } else if (objetivo === "ganar") {
-                plan = `Necesitas un superávit calórico. Come más proteínas, carbohidratos y grasas saludables. Entrena fuerza y aumenta la carga progresivamente.`;
-            }
-            
-            // Mostrar el plan personalizado generado
-            document.getElementById("formularioPersonalizado").innerHTML = `
-                <h3>Tu Plan Personalizado</h3>
-                <p><strong>Objetivo:</strong> ${objetivo}</p>
-                <p><strong>Peso:</strong> ${peso} kg</p>
-                <p><strong>Altura:</strong> ${altura} cm</p>
-                <p><strong>Edad:</strong> ${edad} años</p>
-                <p><strong>Deporte:</strong> ${deporte}</p>
-                <p><strong>Recomendaciones:</strong> ${plan}</p>
-            `;
-        });
-    </script>
-</body>
-</html>
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: yellow;
+    font-size: 3rem;
+    margin-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    background-color: #333;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+section {
+    padding: 40px 20px;
+}
+
+.btn {
+    background-color: yellow;
+    color: black;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#formularioPersonalizado {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+form {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+label {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    display: inline-block;
+    text-align: left;
+}
+
+input, select {
+    background-color: #555;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
