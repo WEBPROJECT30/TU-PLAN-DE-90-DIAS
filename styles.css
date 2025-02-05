@@ -1,79 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebProject - Plan de Dieta</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+<style>
+    body {
+        background: linear-gradient(to right, #333, #1a1a1a);
+        color: white;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        margin: 0;
+    }
+    h1 {
+        color: yellow;
+        font-size: 2.5rem;
+    }
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s;
+    }
+    nav ul li a:hover {
+        color: yellow;
+    }
+    .btn {
+        background-color: yellow;
+        color: black;
+        padding: 12px 25px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .btn:hover {
+        background-color: #e6e600;
+    }
+    #formularioPersonalizado {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
         body {
-            background-color: #1a1a1a;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
+            font-size: 14px;
         }
         h1 {
-            color: yellow;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
+            font-size: 2rem;
         }
         .btn {
-            background-color: yellow;
-            color: black;
             padding: 10px 20px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
         }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>WebProject</h1>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#planes">Planes</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section id="inicio">
-        <h2>Tu Plan de Dieta Personalizado</h2>
-        <p>Descubre un plan hecho a medida según tu cuerpo y objetivos.</p>
-        <a href="#formulario" class="btn">Generar mi Plan</a>
-    </section>
-    <section id="formulario">
-        <h2>Completa el Formulario</h2>
-        <form id="dietaForm">
-            <label for="objetivo">Objetivo:</label>
-            <select id="objetivo">
-                <option value="bajar">Bajar Peso</option>
-                <option value="mantener">Mantener Peso</option>
-                <option value="ganar">Ganar Masa Muscular</option>
-            </select>
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" required>
-            <label for="altura">Altura (cm):</label>
-            <input type="number" id="altura" required>
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" required>
-            <label for="deporte">Deporte practicado:</label>
-            <input type="text" id="deporte" required>
-            <button type="submit" class="btn">Generar Plan</button>
-        </form>
-        <div id="formularioPersonalizado"></div>
-    </section>
-    <script src="script.js" defer></script>
-</body>
-</html>
+    }
+</style>
