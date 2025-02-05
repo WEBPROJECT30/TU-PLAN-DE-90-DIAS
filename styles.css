@@ -1,63 +1,79 @@
-<style>
-    body {
-        background: linear-gradient(to right, #333, #1a1a1a);
-        color: white;
-        font-family: 'Arial', sans-serif;
-        text-align: center;
-        margin: 0;
-    }
-    h1 {
-        color: yellow;
-        font-size: 2.5rem;
-    }
-    nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    nav ul li {
-        display: inline;
-        margin: 0 15px;
-    }
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: color 0.3s;
-    }
-    nav ul li a:hover {
-        color: yellow;
-    }
-    .btn {
-        background-color: yellow;
-        color: black;
-        padding: 12px 25px;
-        text-decoration: none;
-        display: inline-block;
-        margin-top: 20px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    .btn:hover {
-        background-color: #e6e600;
-    }
-    #formularioPersonalizado {
-        margin-top: 20px;
-        padding: 20px;
-        background-color: #222;
-        border-radius: 10px;
-    }
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        body {
-            font-size: 14px;
-        }
-        h1 {
-            font-size: 2rem;
-        }
-        .btn {
-            padding: 10px 20px;
-        }
-    }
-</style>
+h1 {
+    color: yellow;
+    font-size: 3rem;
+    margin-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    background-color: #333;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+section {
+    padding: 40px 20px;
+}
+
+.btn {
+    background-color: yellow;
+    color: black;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#formularioPersonalizado {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+form {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+label {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    display: inline-block;
+    text-align: left;
+}
+
+input, select {
+    background-color: #555;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
