@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebProject - Plan de Dieta Personalizado</title>
-    <link rel="stylesheet" href="styles.css"><script src="script.js" defer></script>
-
+    <title>Generar Plan Personalizado</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             background-color: #1a1a1a;
             color: white;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
         }
         h1 {
@@ -42,33 +41,11 @@
             background-color: #222;
             border-radius: 10px;
         }
-        label {
-            font-size: 1.1rem;
-            margin: 10px 0;
-            display: inline-block;
-        }
-        input, select {
-            background-color: #555;
-            border: none;
-            color: white;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            width: 100%;
-        }
-        form {
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-            max-width: 600px;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
     <header>
-        <h1>WebProject</h1>
+        <h1>Genera tu Plan de Dieta y Entrenamiento Personalizado</h1>
         <nav>
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
@@ -77,108 +54,102 @@
             </ul>
         </nav>
     </header>
+
     <section id="inicio">
-        <h2>Tu Plan de Dieta Personalizado</h2>
-        <p>Descubre un plan hecho a medida según tu cuerpo y objetivos.</p>
-        <a href="#formulario" class="btn">Generar mi Plan</a>
+        <h2>Tu Plan de Dieta y Entrenamiento Personalizado</h2>
+        <p>Ingresa tus datos para recibir recomendaciones específicas.</p>
+        <a href="#formulario" class="btn">Generar Plan</a>
     </section>
+
     <section id="formulario">
         <h2>Completa el Formulario</h2>
         <form id="dietaForm">
-            <!-- Datos Básicos -->
             <label for="objetivo">Objetivo:</label>
-            <select id="objetivo" required>
+            <select id="objetivo">
                 <option value="bajar">Bajar Peso</option>
                 <option value="mantener">Mantener Peso</option>
                 <option value="ganar">Ganar Masa Muscular</option>
             </select>
-
+            
             <label for="peso">Peso (kg):</label>
             <input type="number" id="peso" required>
-
+            
             <label for="altura">Altura (cm):</label>
             <input type="number" id="altura" required>
-
+            
             <label for="edad">Edad:</label>
             <input type="number" id="edad" required>
-
-            <label for="deporte">Deporte practicado:</label>
-            <input type="text" id="deporte" required>
-
-            <!-- Preferencias Alimentarias -->
-            <label for="preferencias">Preferencias alimentarias:</label>
-            <select id="preferencias" required>
-                <option value="ninguna">Ninguna</option>
-                <option value="vegetariano">Vegetariano</option>
-                <option value="vegano">Vegano</option>
-                <option value="sin_gluten">Sin Gluten</option>
-                <option value="sin_lactosa">Sin Lactosa</option>
-            </select>
-
-            <label for="intolerancias">Intolerancias alimentarias:</label>
-            <input type="text" id="intolerancias">
-
-            <label for="frecuencia">Frecuencia de ejercicio (por semana):</label>
+            
+            <label for="frecuencia">Frecuencia de Ejercicio (días a la semana):</label>
             <input type="number" id="frecuencia" required>
-
+            
+            <label for="deporte">Deporte Practicado:</label>
+            <input type="text" id="deporte" required>
+            
             <button type="submit" class="btn">Generar Plan</button>
         </form>
+
         <div id="formularioPersonalizado"></div>
     </section>
 
     <script>
-        document.getElementById("dietaForm").addEventListener("submit", function(event) {
+        // Cuando el formulario se envíe
+        document.getElementById("dietaForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             
+            // Recogemos los datos del formulario
             let objetivo = document.getElementById("objetivo").value;
             let peso = parseInt(document.getElementById("peso").value);
             let altura = parseInt(document.getElementById("altura").value);
             let edad = parseInt(document.getElementById("edad").value);
-            let deporte = document.getElementById("deporte").value;
-            let preferencias = document.getElementById("preferencias").value;
-            let intolerancias = document.getElementById("intolerancias").value;
             let frecuencia = parseInt(document.getElementById("frecuencia").value);
+            let deporte = document.getElementById("deporte").value;
             
-            let plan = "";
-            let calorias = 0;
+            // Llamada a la API de OpenAI para generar el plan de dieta y entrenamiento
+            let plan = await generarPlanConIA({ objetivo, peso, altura, edad, frecuencia, deporte });
             
-            // Calcular las calorías necesarias
-            if (objetivo === "bajar") {
-                calorias = (peso * 24) - 500; // Ejemplo simplificado de reducción de calorías
-                plan = `Debes consumir menos calorías de las que gastas. Enfócate en consumir proteínas magras, vegetales y evitar azúcares. Realiza ejercicio cardiovascular como correr o nadar.`;
-            } else if (objetivo === "mantener") {
-                calorias = peso * 24; // Mantenimiento de calorías
-                plan = `Tu dieta debe ser equilibrada. Consume carbohidratos complejos, proteínas magras y grasas saludables en cada comida.`;
-            } else if (objetivo === "ganar") {
-                calorias = (peso * 24) + 500; // Superávit calórico
-                plan = `Necesitas un superávit calórico. Come más proteínas, carbohidratos y grasas saludables. Entrena fuerza y aumenta progresivamente la carga.`;
-            }
-
-            // Personalización con preferencias alimentarias
-            if (preferencias === "vegetariano") {
-                plan += ` Como preferencia vegetariana, asegúrate de incluir fuentes de proteínas vegetales como tofu, lentejas o garbanzos.`;
-            } else if (preferencias === "vegano") {
-                plan += ` Para un plan vegano, incluye alimentos como quinoa, tempeh y frutos secos.`;
-            } else if (preferencias === "sin_gluten") {
-                plan += ` Evita el gluten, opta por arroz integral, patatas y quinoa como fuentes de carbohidratos.`;
-            } else if (preferencias === "sin_lactosa") {
-                plan += ` Evita los lácteos. Usa leches vegetales como almendra o avena.`;
-
-            }
-
-            // Mostrar el plan generado
+            // Mostramos el plan generado
             document.getElementById("formularioPersonalizado").innerHTML = `
                 <h3>Tu Plan Personalizado</h3>
                 <p><strong>Objetivo:</strong> ${objetivo}</p>
                 <p><strong>Peso:</strong> ${peso} kg</p>
                 <p><strong>Altura:</strong> ${altura} cm</p>
                 <p><strong>Edad:</strong> ${edad} años</p>
-                <p><strong>Deporte:</strong> ${deporte}</p>
-                <p><strong>Frecuencia de Ejercicio:</strong> ${frecuencia} veces por semana</p>
-                <p><strong>Calorías recomendadas:</strong> ${calorias} kcal</p>
-                <p><strong>Recomendaciones:</strong> ${plan}</p>
+                <p><strong>Frecuencia de ejercicio:</strong> ${frecuencia} días a la semana</p>
+                <p><strong>Deporte Practicado:</strong> ${deporte}</p>
+                <h4>Plan de Dieta y Entrenamiento:</h4>
+                <p><strong>Calorías recomendadas:</strong> ${plan.calorias} kcal</p>
+                <p><strong>Recomendación de entrenamiento:</strong> ${plan.entrenamiento}</p>
+                <p><strong>Recomendación de dieta:</strong> ${plan.dieta}</p>
             `;
         });
+
+        // Función para hacer la llamada a la API de OpenAI (o la que tengas)
+        async function generarPlanConIA(datosFormulario) {
+            const response = await fetch("https://api.openai.com/v1/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "" // Sustituye con tu clave de API
+                },
+                body: JSON.stringify({
+                    model: "text-davinci-003", // O GPT-4 si lo tienes disponible
+                    prompt: `
+                        Genera un plan de entrenamiento y dieta personalizado para alguien que quiera ${datosFormulario.objetivo}. 
+                        La persona tiene ${datosFormulario.edad} años, pesa ${datosFormulario.peso} kg, mide ${datosFormulario.altura} cm y realiza ${datosFormulario.frecuencia} días de ejercicio a la semana. 
+                        Su deporte preferido es: ${datosFormulario.deporte}. Proporciona también las calorías diarias recomendadas, un plan de entrenamiento semanal y una dieta diaria.
+                    `,
+                    max_tokens: 300
+                })
+            });
+
+            const data = await response.json();
+            return {
+                calorias: data.choices[0].text.split("\n")[0],  // Parsear la respuesta para extraer las calorías recomendadas
+                entrenamiento: data.choices[0].text.split("\n")[1],  // Parsear el plan de entrenamiento
+                dieta: data.choices[0].text.split("\n")[2]  // Parsear el plan de dieta
+            };
+        }
     </script>
 </body>
 </html>
