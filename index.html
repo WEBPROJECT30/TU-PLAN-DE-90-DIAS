@@ -118,7 +118,7 @@
                 <p><strong>Frecuencia de ejercicio:</strong> ${frecuencia} días a la semana</p>
                 <p><strong>Deporte Practicado:</strong> ${deporte}</p>
                 <h4>Plan de Dieta y Entrenamiento:</h4>
-                <p><strong>Calorías recomendadas:</strong> ${plan.calorias} kcal</p>
+                <p><strong>Calorías recomendadas:</strong> ${plan.calorias}</p>
                 <p><strong>Recomendación de entrenamiento:</strong> ${plan.entrenamiento}</p>
                 <p><strong>Recomendación de dieta:</strong> ${plan.dieta}</p>
             `;
@@ -130,7 +130,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "" // 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
+                    "Authorization": "" // Sustituye con tu clave de API
                 },
                 body: JSON.stringify({
                     model: "text-davinci-003", // O GPT-4 si lo tienes disponible
@@ -139,15 +139,20 @@
                         La persona tiene ${datosFormulario.edad} años, pesa ${datosFormulario.peso} kg, mide ${datosFormulario.altura} cm y realiza ${datosFormulario.frecuencia} días de ejercicio a la semana. 
                         Su deporte preferido es: ${datosFormulario.deporte}. Proporciona también las calorías diarias recomendadas, un plan de entrenamiento semanal y una dieta diaria.
                     `,
-                    max_tokens: 300
+                    max_tokens: 500
                 })
             });
 
             const data = await response.json();
+            // Extraemos el texto de la respuesta de la IA
+            const text = data.choices[0].text.trim();
+
+            // Aseguramos que el texto de la respuesta tenga el formato esperado (calorías, entrenamiento, dieta)
+            const lines = text.split("\n");
             return {
-                calorias: data.choices[0].text.split("\n")[0],  // Parsear la respuesta para extraer las calorías recomendadas
-                entrenamiento: data.choices[0].text.split("\n")[1],  // Parsear el plan de entrenamiento
-                dieta: data.choices[0].text.split("\n")[2]  // Parsear el plan de dieta
+                calorias: lines[0] || "No especificado",
+                entrenamiento: lines[1] || "No especificado",
+                dieta: lines[2] || "No especificado"
             };
         }
     </script>
